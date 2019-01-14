@@ -7,7 +7,6 @@
 
 <script>
 import Form from './components/Form.vue'
-import Result from './components/Result.vue'
 
 export default {
   name: 'app',

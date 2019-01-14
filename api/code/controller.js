@@ -1,15 +1,17 @@
 const Model = require("./model")
 const { Message, Producer } = require('redis-smq');
-const producer = new Producer('main', {
+const redisConfig = {
     namespace: 'app',
     redis: {
         host: 'redis',
         port: 6379,
         connect_timeout: 3600*1000,
     }
-});
+}
+const producer = new Producer('main', redisConfig);
 
 exports.insert = (req, res) => {
+    console.log(req.body)
     Model.create(req.body)
         .then((result) => {
             
@@ -50,7 +52,6 @@ exports.getById = (req, res) => {
 };
 
 exports.patchById = (req, res) => {
-    delete req.body.user;
     Model.patch(req.params.id, req.body)
         .then((result) => {
             res.status(204).json({});

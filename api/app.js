@@ -1,6 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
-
+const bodyParser = require("body-parser")
 var apiRouter = require('./code/router')
 
 var app = express();
@@ -8,9 +8,16 @@ var app = express();
 // API setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    next();
+});
 
 app.use('/api', apiRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,7 +38,8 @@ app.use(function(err, req, res, next) {
 app.listen(process.env.PORT || 3000)
 
 
-// After app start
+
+After app start
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO, { useNewUrlParser: true })

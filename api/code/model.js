@@ -6,16 +6,12 @@ const ModelName = "Queue"
 const objSchema = new Schema({
     
     location: {
-        name: { type: String, required: true},
+        name: String,
         lat: Number,
         long: Number
     },
-    
-    waitedTime: Number,
-    estimatedTime: Number,
-    
-    startedAt: { type: Date, default: Date.now },
-    endedAt: Date
+    people: Number,
+    predicted: Number
 });
 
 objSchema.virtual('id').get(function () {

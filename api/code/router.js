@@ -20,8 +20,6 @@ router.delete("/:id", [
     Controller.removeById
 ])
 
-
-
 const mainRouter = Router()
 mainRouter.use("/queue", router)
 
