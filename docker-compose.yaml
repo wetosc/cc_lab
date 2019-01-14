@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  
+  api:
+    build: api/
+    environment:
+    - MONGO=mongodb://mongo:27017/app
+    - PORT=3000
+    networks:
+    - backend
+    - frontend
+    ports:
+      - "9000:3000"
+    depends_on:
+      - mongo
+      - redis
+
+  frontend:
+    build: frontend/
+    networks:
+    - frontend
+
+  ml:
+    build: ml/
+    networks:
+    - backend
+
+  mongo:
+    image: mongo:latest
+    volumes:
+    - ./mongo:/data/db
+    networks:
+    - backend
+  
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
