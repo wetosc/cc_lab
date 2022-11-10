@@ -10,6 +10,6 @@
     "express": "^4.16.4",
     "http-errors": "~1.6.2",
     "mongoose": "^5.2.9",
-    "redis-smq": "^1.0.21"
+    "redis-smq": "^1.1.6"
   }
 }
